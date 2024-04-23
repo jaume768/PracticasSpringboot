@@ -1,0 +1,8 @@
+# Usar imagen base de TomEE Plus con JRE 8
+FROM tomee:9.1.2
+RUN rm -rf /usr/local/tomee/webapps/*
+# Copiar el archivo WAR en el despliegue de TomEE
+COPY target/login_spring-0.0.1-SNAPSHOT.war /usr/local/tomee/webapps/ROOT.war
+CMD ["catalina.sh","run"]
+# Exponer el puerto 8080 para acceder a TomEE
+EXPOSE 8080

@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+
+  db_ataula:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ataula
+      MYSQL_USER: jaume
+      MYSQL_PASSWORD: contra
+    volumes:
+      - db_data_ataula:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  phpmyadmin_ataula:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: db_ataula
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "8083:80"
+    depends_on:
+      - db_ataula
+volumes:
+  db_data_ataula:

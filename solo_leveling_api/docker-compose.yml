@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+
+  db_leveling:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: leveling
+      MYSQL_USER: jaume
+      MYSQL_PASSWORD: contra
+    volumes:
+      - db_data_leveling:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  phpmyadmin_leveling:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: db_leveling
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "8083:80"
+    depends_on:
+      - db_leveling
+volumes:
+  db_data_leveling:
